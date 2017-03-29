@@ -2,9 +2,25 @@
   text-align: center;
 }
 
+.Queue-Column {
+  border: 1px solid black;
+}
+
+.InProgress-Column {
+  border: 1px solid black;
+}
+
+.Completed-Column {
+  border: 1px solid black;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
+}
+
+.Card-Box {
+  border: 1px solid black;
 }
 
 .App-header {

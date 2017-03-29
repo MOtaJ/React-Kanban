@@ -2,7 +2,8 @@
 module.exports = function(sequelize, DataTypes) {
   var Cards = sequelize.define('Cards', {
     Title: DataTypes.STRING,
-    Priority: DataTypes.TEXT,
+    Priority: DataTypes.STRING,
+    Status: DataTypes.STRING,
     CreatedBy: DataTypes.STRING,
     AssignedTo: DataTypes.STRING
   }, {

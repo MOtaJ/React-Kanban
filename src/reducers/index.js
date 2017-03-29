@@ -1,6 +1,7 @@
-import { ADD_CARD } from '../actions'
+import { ADD_CARD, UPDATE_CARD } from '../actions'
 
 const initialState = {
+
   cards: []
 };
 
@@ -14,7 +15,22 @@ function cards(state = initialState, action) {
             Title: action.Title,
             Priority: action.Priority,
             CreatedBy: action.CreatedBy,
-            AssignedTo: action.AssignedTo
+            AssignedTo: action.AssignedTo,
+            Status: action.Status
+          }
+        ]
+      })
+    case UPDATE_CARD:
+      //immutable - dont replace state, give a new one
+      return Object.assign({}, state, {
+        cards: [
+          ...state.cards,
+          {
+            Title: action.Title,
+            Priority: action.Priority,
+            CreatedBy: action.CreatedBy,
+            AssignedTo: action.AssignedTo,
+            Status: action.Status
           }
         ]
       })

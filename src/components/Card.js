@@ -1,18 +1,29 @@
 import React, {Component} from 'react'
 
-const Card = (props) => (
-  <div className="Card-Box">
-    <ul>
-      <li>
-        <p> key/id = { props.id } </p>
-        <p> Title = { props.Title } </p>
-        <p> Priority = { props.Priority } </p>
-        <p> AssignedTo = { props.AssignedTo } </p>
-        <p> CreatedBy = { props.CreatedBy } </p>
-      </li>
-    </ul>
-  </div>
+class Card extends Component {
+  constructor(props) {
+    super(props);
 
-)
+    this.statusHandler=this.statusHandler.bind(this)
+  }
+
+  statusHandler(event) {
+    event.preventDefault();
+
+  }
+  render(){
+    return(
+      <div className="Card-Box">
+        <p> Title = { this.props.Title } </p>
+        <p> Priority = { this.props.Priority } </p>
+        <p> AssignedTo = { this.props.AssignedTo } </p>
+        <p> CreatedBy = { this.props.CreatedBy } </p>
+        <p> Status = {this.props.Status} </p>
+  </div>
+      )
+  }
+
+}
+
 
 export default Card;
