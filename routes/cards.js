@@ -27,7 +27,7 @@ router.get('/queueCards', (req, res, next) => {
 })
 
 router.get('/InProgressCards', (req, res, next) => {
-  Card.findAll({
+  Cards.findAll({
     where: {
       Status: "InProgress"
     }
@@ -38,9 +38,9 @@ router.get('/InProgressCards', (req, res, next) => {
 })
 
 router.get('/DoneCards', (req, res, next) => {
-  Card.findAll({
+  Cards.findAll({
     where: {
-      Status: "InProgress"
+      Status: "Done"
     }
   })
   .then(function(cards) {
@@ -54,11 +54,35 @@ router.post('/newCard', (req, res, next) => {
     Priority: req.body.Priority,
     CreatedBy: req.body.CreatedBy,
     AssignedTo: req.body.AssignedTo,
-    Status: "Queue"
+    Status: req.body.Status
   })
   .then(function(cards) {
     res.send(cards)
   })
+});
+
+router.put('/editCard/:id', (req, res, next) => {
+  Cards.update({
+    Status : req.body.Status
+  },
+  { where: {
+    id : {id: `${req.params.id}`}
+  }}
+  )
+  .then(function(cards) {
+    res.end()
+  })
+})
+
+router.delete('/deleteCard/:id', (req, res) => {
+  Cards.destroy(
+  {
+    where: {id: `${req.params.id}`}
+  }
+  )
+  .then(function () {
+    res.end();
+  });
 });
 
 module.exports = router;

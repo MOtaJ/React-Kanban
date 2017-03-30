@@ -7,7 +7,7 @@ import Done from '../../components/Done.js'
 import './styles.css';
 
 import { connect } from 'react-redux';
-import { addCard, updateCards } from '../../actions';
+import { addCard, updateCards, deleteCard } from '../../actions';
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class App extends Component {
     }
   }
 
-  getAllCards(){
+/*  getAllCards(){
     return new Promise(function(resolve, reject){
       function reqListener(){
         resolve(this.responseText)//resolves the data
@@ -30,53 +30,7 @@ class App extends Component {
       oReq.setRequestHeader("Content-type", "application/json")
       oReq.send();
     })
-  }
-
-  getQueueCards(card){
-    return new Promise(function(resolve, reject){
-      console.log(card)
-      function reqListener(){
-        console.log(this.responseText)
-        resolve(this.responseText)
-      }
-
-      const oReq = new XMLHttpRequest();
-      oReq.addEventListener('load', reqListener)
-      oReq.open("GET", "/cards/queueCards", true);
-      oReq.setRequestHeader("Content-type", "application/json")
-      oReq.send();
-    })
-  }
-
-  getInProgressCards(card){
-    return new Promise(function(resolve, reject){
-      function reqListener(){
-        console.log("This is the reponse text",this.responseText)
-        resolve(this.responseText)
-      }
-
-      const oReq = new XMLHttpRequest();
-      oReq.addEventListener('load', reqListener)
-      oReq.open("GET", "/cards/InProgressCards", true);
-      oReq.setRequestHeader("Content-type", "application/json")
-      oReq.send();
-    })
-  }
-
-  getDoneCards(card){
-    return new Promise(function(resolve, reject){
-      function reqListener(){
-        console.log(this.responseText)
-        resolve(this.responseText)
-      }
-
-      const oReq = new XMLHttpRequest();
-      oReq.addEventListener('load', reqListener)
-      oReq.open("GET", "/cards/DoneCards", true);
-      oReq.setRequestHeader("Content-Type", "application/json")
-      oReq.send();
-    })
-  }
+  }*/
 
 /*  this.addCard({
     Title : this.state.Title,
@@ -90,7 +44,7 @@ class App extends Component {
   addCard(card) {
     this.props.addCard({card})
   }*/
-
+/*
     componentWillMount(){
       this.getAllCards()
       .then( data => {
@@ -98,7 +52,7 @@ class App extends Component {
           this.props.onAddCard(card.Title, card.Priority, card.CreatedBy, card.AssignedTo, card.Status)
         })
       })
-    }
+    }*/
 
   render() {
     console.log(this.props)
@@ -135,11 +89,14 @@ const mapStateToProps = (state) => {
 //actions live here
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddCard: (Title, Priority, CreatedBy, AssignedTo, Status) => {
-      dispatch(addCard(Title, Priority, CreatedBy, AssignedTo, Status));
+    onAddCard: (id, Title, Priority, CreatedBy, AssignedTo, Status) => {
+      dispatch(addCard(id, Title, Priority, CreatedBy, AssignedTo, Status));
     },
     updateCards : cards => {
       dispatch( updateCards(cards))
+    },
+    onDeleteCard: (id, Title, Priority, CreatedBy, AssignedTo, Status) => {
+      dispatch(deleteCard(id, Title, Priority, CreatedBy, AssignedTo, Status))
     }
   }
 };

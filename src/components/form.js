@@ -12,7 +12,7 @@ class CardForm extends Component {
       Priority: 'low',
       CreatedBy: '',
       AssignedTo: '',
-      Status: 'Queue'
+      Status: ''
     };
 
     this.handleSubmit=this.handleSubmit.bind(this);
@@ -32,10 +32,6 @@ class CardForm extends Component {
     this.setState({AssignedTo : event.target.value})
   }
 
-  handleChangeStatus(event) {
-    this.setState({Status : event.target.value})
-  }
-
 
   handleSubmit(event){
     console.log('handling submit')
@@ -49,7 +45,7 @@ class CardForm extends Component {
       Status : this.state.Status
     })
     .then((card) => {
-      this.props.onAddCard(card.id, card.Title, card.Priority, card.CreatedBy, card.AssignedTo, card.Status,)
+      this.props.onAddCard(card.Title, card.Priority, card.CreatedBy, card.AssignedTo, card.Status)
     })
 
     this.setState({
@@ -76,6 +72,8 @@ class CardForm extends Component {
     })
   }
 
+
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -95,13 +93,6 @@ class CardForm extends Component {
         <div>
           <input type="text" placeholder="AssignedTo" value={this.state.AssignedTo} onChange={this.handleChangeAssignedTo.bind(this)} />
         </div>
-        <div>
-            <select onChange={this.handleChangeStatus.bind(this)} value={ this.props.Status }>
-              <option value="Queue">Queue</option>
-              <option value="InProgress">In Progress</option>
-              <option value="Completed">Completed</option>
-            </select>
-        </div>
           <button type = "submit" value = "new card ">Add Card</button>
       </form>
     )
@@ -116,8 +107,8 @@ const mapStateToProps = (state) => {
 //actions live here
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddCard: (Title, Priority, CreatedBy, AssignedTo, Status) => {
-      dispatch(addCard(Title, Priority, CreatedBy, AssignedTo, Status));
+    onAddCard: (id, Title, Priority, CreatedBy, AssignedTo, Status) => {
+      dispatch(addCard(id, Title, Priority, CreatedBy, AssignedTo, Status));
     },
     updateCards : cards => {
       dispatch( updateCards(cards))

@@ -42,10 +42,11 @@ class Queue extends Component {
 
   render(){
     return(
+
     <div className = "Queue-Column">
       <h3>Queue</h3>
       {this.props.cards
-        /*.filter( card => card.Status === 'Queue')*/
+        .filter( card => card.Status === 'Queue')
         .map( ({Title, Priority, CreatedBy, AssignedTo, Status}) =>
           <Card
                 Title={ Title }
@@ -69,8 +70,8 @@ const mapStateToProps = (state) => {
 //actions live here
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddCard: (Title, Priority, CreatedBy, AssignedTo, Status) => {
-      dispatch(addCard(Title, Priority, CreatedBy, AssignedTo, Status));
+    onAddCard: (id, Title, Priority, CreatedBy, AssignedTo, Status) => {
+      dispatch(addCard(id, Title, Priority, CreatedBy, AssignedTo, Status));
     }
   }
 };

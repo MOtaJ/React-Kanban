@@ -1,4 +1,4 @@
-import { ADD_CARD, UPDATE_CARD } from '../actions'
+import { ADD_CARD, UPDATE_CARD, DELETE_CARD } from '../actions'
 
 const initialState = {
 
@@ -34,6 +34,21 @@ function cards(state = initialState, action) {
           }
         ]
       })
+    case DELETE_CARD:
+
+    return Object.assign({}, state, {
+      cards: [
+        ...state.cards,
+        {
+          Title: action.Title,
+          Priority: action.Priority,
+          CreatedBy: action.CreatedBy,
+          AssignedTo: action.AssignedTo,
+          Status: action.Status
+        }
+      ]
+    })
+
     default:
       return state;
   }
